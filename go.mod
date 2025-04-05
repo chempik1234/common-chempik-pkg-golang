@@ -1,4 +1,4 @@
-module commonpkg
+module github.com/chempik1234/common-chempik-pkg-golang
 
 go 1.24.0
 
