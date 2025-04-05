@@ -1,8 +1,8 @@
 package interceptors
 
 import (
-	"commonpkg/pkg/logger"
 	"context"
+	"github.com/chempik1234/common-chempik-pkg-golang/pkg/logger"
 	"github.com/google/uuid"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
