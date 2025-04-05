@@ -56,6 +56,11 @@ func GetOrCreateLoggerFromCtx(ctx context.Context) *Logger {
 	return logger
 }
 
+func (l *Logger) Debug(ctx context.Context, msg string, fields ...zap.Field) {
+	fields = TryAppendRequestIDFromContext(ctx, fields)
+	l.l.Debug(msg, fields...)
+}
+
 func (l *Logger) Info(ctx context.Context, msg string, fields ...zap.Field) {
 	fields = TryAppendRequestIDFromContext(ctx, fields)
 	l.l.Info(msg, fields...)
@@ -64,6 +69,11 @@ func (l *Logger) Info(ctx context.Context, msg string, fields ...zap.Field) {
 func (l *Logger) Warn(ctx context.Context, msg string, fields ...zap.Field) {
 	fields = TryAppendRequestIDFromContext(ctx, fields)
 	l.l.Warn(msg, fields...)
+}
+
+func (l *Logger) Error(ctx context.Context, msg string, fields ...zap.Field) {
+	fields = TryAppendRequestIDFromContext(ctx, fields)
+	l.l.Error(msg, fields...)
 }
 
 func (l *Logger) Fatal(ctx context.Context, msg string, fields ...zap.Field) {
