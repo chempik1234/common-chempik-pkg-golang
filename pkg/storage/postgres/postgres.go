@@ -40,7 +40,7 @@ func New(ctx context.Context, config Config) (*pgxpool.Pool, error) {
 	return conn, nil
 }
 
-func Migrate(ctx context.Context, config Config, migrationsPath string) (*pgxpool.Pool, error) {
+func Migrate(ctx context.Context, config Config, migrationsPath string) error {
 	connStringShort := fmt.Sprintf("postgres://%s:%s@%s:%d/%s?sslmode=disable",
 		config.Username,
 		config.Password,
@@ -54,11 +54,11 @@ func Migrate(ctx context.Context, config Config, migrationsPath string) (*pgxpoo
 		connStringShort,
 	)
 	if err != nil {
-		return nil, fmt.Errorf("unable to create migrations table: %v", err)
+		return fmt.Errorf("unable to create migrations table: %v", err)
 	}
 	if err = m.Up(); err != nil && !errors.Is(err, migrate.ErrNoChange) {
-		return nil, fmt.Errorf("unable to apply migrations: %v", err)
+		return fmt.Errorf("unable to apply migrations: %v", err)
 	}
 
-	return conn, nil
+	return nil
 }
