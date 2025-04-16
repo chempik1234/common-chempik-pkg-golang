@@ -1,9 +1,9 @@
 package redis
 
 import (
-	"commonpkg/pkg/logger"
 	"context"
 	"fmt"
+	"github.com/chempik1234/common-chempik-pkg-golang/pkg/logger"
 	"github.com/go-redis/redis/v7"
 	"go.uber.org/zap"
 	"time"
